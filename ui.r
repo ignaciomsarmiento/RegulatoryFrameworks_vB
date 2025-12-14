@@ -100,22 +100,86 @@ shinyUI(
       });
     "))
     ),
+    tags$script(HTML("
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.querySelector('.hamburger-btn');
+    const menu = document.querySelector('.hamburger-dropdown');
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function () {
+      menu.classList.add('hidden');
+    });
+  });
+")),
     
+
     # ---- HEADER ----
     tags$div(
       class = "header",
       tags$div(
-        class = "header-content",    # ← Cambio de clase
+        class = "header-content",
         
-        # Logo PRIMERO (izquierda)
+        # Logo (izquierda)
         tags$img(src = "WB.png", class = "wb-logo"),
         
-        # Menú DESPUÉS (derecha)
+        # Spacer (centro) — mantiene alineación del grid
+        tags$div(),
+        
+        # Hamburger (derecha)
         tags$div(
-          class = "nav-menu",
-          tags$a("Explorer", class = "nav-link", `data-tab` = "landing"),
-          tags$a("Guide", class = "nav-link", `data-tab` = "Guide"),
-          tags$a("About", class = "nav-link", `data-tab` = "About")
+          class = "hamburger-menu",
+          
+          # Botón ☰
+          tags$div(
+            class = "hamburger-btn",
+            HTML("&#9776;")  # ☰
+          ),
+          
+          # Dropdown
+          tags$div(
+            class = "hamburger-dropdown hidden",
+            
+            tags$a(
+              "Home",
+              class = "nav-link",
+              onclick = "document.querySelector('a[data-value=\"landing\"]').click();"
+            ),
+           
+            
+            tags$hr(),
+            
+            tags$a(
+              "Non-salary Labor Costs",
+              class = "nav-link",
+              onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})"
+            ),
+            tags$a(
+              "Minimum Wages",
+              class = "nav-link",
+              onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();"
+            ),
+            tags$a(
+              "Business Taxes",
+              class = "nav-link",
+              onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();"
+            ),
+            tags$hr(),
+            tags$a(
+              "Guide",
+              class = "nav-link",
+              onclick = "document.querySelector('a[data-value=\"Guide\"]').click();"
+            ),
+            tags$a(
+              "About",
+              class = "nav-link",
+              onclick = "document.querySelector('a[data-value=\"About\"]').click();"
+            ),
+            
+          )
         )
       )
     ),
