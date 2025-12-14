@@ -5,6 +5,8 @@
 
 /* Variables de color */
 :root {
+  --page-max: 1400px;
+  --page-pad: 40px;
   --light-gray: #F1F3F5;
   --border-gray: #B9BAB5;
   --solid-blue: #002244;
@@ -44,22 +46,30 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--white);              /* ← Te recomiendo blanco */
-  z-index: 2000;
-  padding: 10px 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  height: 80px;
+
+  /* Figma style */
   border-bottom: 1px solid var(--border-gray);
+  background: var(--light-gray);
+
+  z-index: 2000;
+  height: 80px;
+
+  /* Clean look */
+  box-shadow: none;
+  padding: 0;
 }
 
 .header-content {
-  display: grid;                         /* ← CAMBIO: grid en vez de flex */
-  grid-template-columns: 200px 1fr 200px;  /* ← CLAVE: 3 columnas (izq, centro, der) */
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
+  max-width: var(--page-max);
   margin: 0 auto;
   height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 23px var(--page-pad);
+  gap: 24px;
 }
 
 .wb-logo {
@@ -109,6 +119,59 @@ body {
   box-shadow: 0 4px 12px rgba(0, 193, 255, 0.3);
 }
 
+/* =========================
+   HAMBURGER MENU
+   ========================= */
+.hamburger-menu {
+  position: relative;
+  justify-self: end;
+}
+
+.hamburger-btn {
+  font-size: 26px;
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 6px;
+  user-select: none;
+}
+
+.hamburger-btn:hover {
+  background: var(--white);
+}
+
+.hamburger-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  min-width: 260px;
+  z-index: 3000;
+  padding: 10px 0;
+}
+
+.hamburger-dropdown a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--solid-blue);
+  font-weight: 600;
+}
+
+.hamburger-dropdown a:hover {
+  background: var(--light-gray);
+  color: var(--bright-blue);
+}
+
+.hamburger-dropdown hr {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid var(--border-gray);
+}
+
+
 /* ==========================================
    HERO BANNER
    ========================================== */
@@ -140,9 +203,9 @@ body {
    MAIN CONTENT CONTAINER
    ========================================== */
 .main-content {
-  max-width: 1400px;
+  max-width: var(--page-max);
   margin: 0 auto;
-  padding: 40px;
+  padding: 40px var(--page-pad);
 }
 
 .page-section {
