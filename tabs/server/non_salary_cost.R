@@ -74,11 +74,10 @@ labor_server <- function(input, output, session) {
   
   
   # ---- MW Selection ----
-  observeEvent(input$btn_sm1,  { selected_groupB("1sm") })
-  observeEvent(input$btn_sm2,  { selected_groupB("2sm") })
-  observeEvent(input$btn_sm5,  { selected_groupB("5sm") })
-  observeEvent(input$btn_sm10, { selected_groupB("10sm") })
-  observeEvent(input$btn_sm15, { selected_groupB("15sm") })
+  observeEvent(input$mw_selection, {
+    req(input$mw_selection)
+    selected_groupB(input$mw_selection)
+  })
   
   # ---- Components ----
   observeEvent(input$all_component,  { selected_groupC("all_component") })
@@ -1056,4 +1055,3 @@ labor_server <- function(input, output, session) {
   )
   
 }
-

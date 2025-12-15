@@ -114,28 +114,21 @@ labor_ui <- function(id) {
                         "Hold the job constant and change only earnings: choose a multiple of the minimum wage (MW) to see how statutory costs scale with pay.",
                         style = "font-size: 12px; color: #555; margin: 0 0 4px 0;"
                       ),
-                      tags$div(
-                        style = "display: flex; gap: 8px; flex-wrap: wrap;",
-                        actionButton(ns("btn_sm1"), "1MW",
-                                    class = "pill-button active",
-                                    style = "background-color: #f0f0f0; color: #333;
-                                                  border: none; border-radius: 20px; padding: 6px 18px;"),
-                        actionButton(ns("btn_sm2"), "2MW",
-                                    class = "pill-button",
-                                    style = "background-color: #f0f0f0; color: #333;
-                                                  border: none; border-radius: 20px; padding: 6px 18px;"),
-                        actionButton(ns("btn_sm5"), "5MW",
-                                    class = "pill-button",
-                                    style = "background-color: #f0f0f0; color: #333;
-                                                  border: none; border-radius: 20px; padding: 6px 18px;"),
-                        actionButton(ns("btn_sm10"), "10MW",
-                                    class = "pill-button",
-                                    style = "background-color: #f0f0f0; color: #333;
-                                                  border: none; border-radius: 20px; padding: 6px 18px;"),
-                        actionButton(ns("btn_sm15"), "15MW",
-                                    class = "pill-button",
-                                    style = "background-color: #f0f0f0; color: #333;
-                                                  border: none; border-radius: 20px; padding: 6px 18px;")
+                      div(
+                        class = "pretty-select",
+                        selectInput(
+                          inputId = ns("mw_selection"),
+                          label = NULL,
+                          choices = c(
+                            "1 MW" = "1sm",
+                            "2 MW" = "2sm",
+                            "5 MW" = "5sm",
+                            "10 MW" = "10sm",
+                            "15 MW" = "15sm"
+                          ),
+                          selected = "1sm",
+                          width = "100%"
+                        )
                       )
                     ),
 
