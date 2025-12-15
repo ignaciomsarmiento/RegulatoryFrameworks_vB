@@ -103,7 +103,7 @@ shinyUI(
       document.addEventListener('DOMContentLoaded', function() {
         const TAB_PARAM = 'tab';
         const tabContainer = document.getElementById('main_tabs');
-        let suppressPush = false;
+        let isHistoryNav = false;
         let currentTab = null;
 
         function getActiveTab() {
@@ -122,7 +122,11 @@ shinyUI(
 
         function switchToTab(tab, fromPop) {
           if (!tab) return;
-          if (fromPop) suppressPush = true;
+          if (fromPop) isHistoryNav = true;
+          if (tab === currentTab) {
+            if (fromPop) isHistoryNav = false;
+            return;
+          }
           const btn = document.querySelector('a[data-value=\"' + tab + '\"]');
           if (btn) btn.click();
         }
@@ -131,9 +135,14 @@ shinyUI(
         if (window.jQuery) {
           window.jQuery(document).on('shown.bs.tab', 'a[data-toggle=\"tab\"]', function(e) {
             const tab = window.jQuery(e.target).data('value');
-            currentTab = tab || currentTab;
-            if (!suppressPush && tab) syncUrl(tab, false);
-            suppressPush = false;
+            if (!tab) return;
+            if (isHistoryNav) {
+              syncUrl(tab, true); // keep URL in sync without adding history on back/forward
+              isHistoryNav = false;
+            } else if (tab !== currentTab) {
+              syncUrl(tab, false);
+            }
+            currentTab = tab;
           });
         }
 
@@ -141,12 +150,16 @@ shinyUI(
           const observer = new MutationObserver(function() {
             const tab = getActiveTab();
             if (!tab) return;
-            if (suppressPush) {
-              suppressPush = false;
-              syncUrl(tab, true);
+            if (tab === currentTab) {
+              if (isHistoryNav) isHistoryNav = false;
               return;
             }
-            syncUrl(tab, false);
+            if (isHistoryNav) {
+              syncUrl(tab, true);
+              isHistoryNav = false;
+            } else {
+              syncUrl(tab, false);
+            }
             currentTab = tab;
           });
           tabContainer.querySelectorAll('.tab-pane').forEach(function(pane) {
@@ -155,15 +168,16 @@ shinyUI(
         }
 
         const initialTab = new URL(window.location).searchParams.get(TAB_PARAM) || getActiveTab() || 'landing';
-        suppressPush = true;
-        switchToTab(initialTab, true);
         syncUrl(initialTab, true);
+        isHistoryNav = true;
+        switchToTab(initialTab, true);
+        setTimeout(function() { isHistoryNav = false; }, 0);
         currentTab = initialTab;
 
         window.addEventListener('popstate', function(event) {
           const tabFromState = event.state && event.state.tab;
           const tabFromUrl = new URL(window.location).searchParams.get(TAB_PARAM);
-          switchToTab(tabFromState || tabFromUrl, true);
+          switchToTab(tabFromState || tabFromUrl || 'landing', true);
         });
       });
     "))
