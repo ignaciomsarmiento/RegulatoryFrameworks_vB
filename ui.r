@@ -153,7 +153,7 @@ shinyUI(
             tags$hr(),
             
             tags$a(
-              "Non-salary Labor Costs",
+              "Non-Salary Labor Costs",
               class = "nav-link",
               onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})"
             ),
@@ -200,10 +200,11 @@ shinyUI(
           tags$section(
             class = "page-section",
             tags$div(
-              class = "container",
+              class = "landing-container",
               
               # Hero Banner
-              tags$div(class = "hero-banner"),
+              #tags$div(class = "hero-banner"),
+              
               # Two Column Layout for Title and Description
               tags$div(
                 class = "row",
@@ -230,6 +231,12 @@ shinyUI(
                 )
               ),
               
+              tags$div(
+                class = "nav-menu-center",
+                tags$a("Guide", class = "nav-link", `data-tab` = "Guide"),
+                tags$a("About", class = "nav-link", `data-tab` = "About")
+              ),
+              
               # Section Divider
               tags$div(
                 class = "section-divider",
@@ -240,7 +247,7 @@ shinyUI(
               tags$div(class = "topic-grid",
                        tags$div(class = "topic-card", 
                                 onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})",
-                                h3("Non-salary Labor Costs"),
+                                h3("Non-Salary Labor Costs"),
                                 p("Yearly bonuses, social security contributions, and employment benefits")
                        ),
                        # Minimum Wages
@@ -303,4 +310,3 @@ shinyUI(
     )
   )
 )
-
