@@ -131,7 +131,7 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.5px;
   padding: 12px 28px;
   border-radius: 50px;
