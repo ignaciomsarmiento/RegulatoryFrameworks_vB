@@ -36,8 +36,8 @@ forthcoming <- fluidPage(
         style = "margin-top: 60px;",
         tags$button(
           class = "btn btn-primary",
-          onclick = "document.querySelector('.nav-link[data-tab=\"landing\"]').click();",
-          "← Back to Explorer"
+          onclick = "var tabBtn = document.querySelector('a[data-value=\"landing\"]'); if (tabBtn) { if (window.jQuery && window.jQuery(tabBtn).tab) { window.jQuery(tabBtn).tab('show'); } tabBtn.click(); }",
+          "← Back to Home"
         )
       )
       )
