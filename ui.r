@@ -98,6 +98,74 @@ shinyUI(
         });
     
       });
+    ")),
+      tags$script(HTML("
+      document.addEventListener('DOMContentLoaded', function() {
+        const TAB_PARAM = 'tab';
+        const tabContainer = document.getElementById('main_tabs');
+        let suppressPush = false;
+        let currentTab = null;
+
+        function getActiveTab() {
+          if (!tabContainer) return null;
+          const active = tabContainer.querySelector('.tab-pane.active');
+          return active ? active.getAttribute('data-value') : null;
+        }
+
+        function syncUrl(tab, replace) {
+          if (!tab) return;
+          const url = new URL(window.location);
+          url.searchParams.set(TAB_PARAM, tab);
+          const method = replace ? 'replaceState' : 'pushState';
+          window.history[method]({ tab: tab }, '', url);
+        }
+
+        function switchToTab(tab, fromPop) {
+          if (!tab) return;
+          if (fromPop) suppressPush = true;
+          const btn = document.querySelector('a[data-value=\"' + tab + '\"]');
+          if (btn) btn.click();
+        }
+
+        // Hook Bootstrap tab events (Shiny uses BS tabs under the hood)
+        if (window.jQuery) {
+          window.jQuery(document).on('shown.bs.tab', 'a[data-toggle=\"tab\"]', function(e) {
+            const tab = window.jQuery(e.target).data('value');
+            currentTab = tab || currentTab;
+            if (!suppressPush && tab) syncUrl(tab, false);
+            suppressPush = false;
+          });
+        }
+
+        if (tabContainer) {
+          const observer = new MutationObserver(function() {
+            const tab = getActiveTab();
+            if (!tab) return;
+            if (suppressPush) {
+              suppressPush = false;
+              syncUrl(tab, true);
+              return;
+            }
+            syncUrl(tab, false);
+            currentTab = tab;
+          });
+          tabContainer.querySelectorAll('.tab-pane').forEach(function(pane) {
+            observer.observe(pane, { attributes: true, attributeFilter: ['class'] });
+          });
+        }
+
+        const initialTab = new URL(window.location).searchParams.get(TAB_PARAM) || getActiveTab() || 'landing';
+        suppressPush = true;
+        switchToTab(initialTab, true);
+        syncUrl(initialTab, true);
+        currentTab = initialTab;
+
+        window.addEventListener('popstate', function(event) {
+          const tabFromState = event.state && event.state.tab;
+          const tabFromUrl = new URL(window.location).searchParams.get(TAB_PARAM);
+          switchToTab(tabFromState || tabFromUrl, true);
+        });
+      });
     "))
     ),
     tags$script(HTML("
@@ -215,7 +283,6 @@ shinyUI(
                   class = "col-md-6",
                   h1(
                     class = "page-title",
-                    style = "border-bottom: 3px solid #00C1FF; padding-bottom: 15px; display: inline-block;",
                     "Regulatory", tags$br(), "Frameworks Explorer"
                   )
                 ),
@@ -233,43 +300,68 @@ shinyUI(
               
               tags$div(
                 class = "nav-menu-center",
-                tags$a("Guide", class = "nav-link", `data-tab` = "Guide"),
-                tags$a("About", class = "nav-link", `data-tab` = "About")
+                tags$a(
+                  class = "nav-link nav-card",
+                  `data-tab` = "Guide",
+                  tags$span(class = "nav-link-circle", style = "background-image: url('guide-circle.jpg');"),
+                  tags$span(class = "nav-link-title", "Guide"),
+                  tags$span(class = "nav-link-desc", "Learn how to read and navigate the data.")
+                ),
+                tags$a(
+                  class = "nav-link nav-card",
+                  `data-tab` = "About",
+                  tags$span(class = "nav-link-circle", style = "background-image: url('about-circle.jpg');"),
+                  tags$span(class = "nav-link-title", "About"),
+                  tags$span(class = "nav-link-desc", "Meet the team and project goals.")
+                )
               ),
               
               # Section Divider
               tags$div(
                 class = "section-divider",
-                "CHOOSE A REGULATORY FRAMEWORK TOPIC TO EXPLORE DETAILED DATA AND VISUALIZATIONS"
+                "Choose a Topic To Explore"
               ),
               
               
               tags$div(class = "topic-grid",
-                       tags$div(class = "topic-card", 
-                                onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})",
-                                h3("Non-Salary Labor Costs"),
-                                p("Yearly bonuses, social security contributions, and employment benefits")
+                       tags$div(
+                         class = "topic-card", 
+                         onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})",
+                         tags$div(class = "topic-card-image labor-img", style = "background-image: url('topic-labor.png');"),
+                         tags$div(
+                           class = "topic-card-body",
+                           h3(class = "topic-card-title", "Non-Salary Labor Costs"),
+                           p(class = "topic-card-description", "Yearly bonuses, social security contributions, and employment benefits")
+                         )
                        ),
                        # Minimum Wages
                        tags$div(
                          class = "topic-card disabled",
                          onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();",
-                         h3("Minimum Wages"),
-                         p("Minimum wage policies and trends across the region"),
-                         tags$span(class = "topic-card-badge", "FORTHCOMING")
+                         tags$div(class = "topic-card-image minwage-img"),
+                         tags$div(
+                           class = "topic-card-body",
+                           h3(class = "topic-card-title", "Minimum Wages"),
+                           p(class = "topic-card-description", "Minimum wage policies and trends across the region"),
+                           tags$span(class = "topic-card-badge", "FORTHCOMING")
+                         )
                        ),
                        
                        # Business Taxes
                        tags$div(
                          class = "topic-card disabled",
                          onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();",
-                         h3("Business Taxes"),
-                         p("Corporate tax rates, incentives, and fiscal policies"),
-                         tags$span(class = "topic-card-badge", "FORTHCOMING")
+                         tags$div(class = "topic-card-image btax-img"),
+                         tags$div(
+                           class = "topic-card-body",
+                           h3(class = "topic-card-title", "Business Taxes"),
+                           p(class = "topic-card-description", "Corporate tax rates, incentives, and fiscal policies"),
+                           tags$span(class = "topic-card-badge", "FORTHCOMING")
+                         )
                        )
-                       
-                       
-                                       
+                      
+               
+                                     
               ),
             
               tags$div(

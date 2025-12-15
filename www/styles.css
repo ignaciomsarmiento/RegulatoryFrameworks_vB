@@ -17,6 +17,13 @@
   --bright-blue: #00C1FF;
   --white: #ffffff;
   --text-dark: #1a1a1a;
+  --fs-page-title: 40px;
+  --fs-page-subtitle: 24px;
+  --fs-section-divider: 14px;
+  --fs-topic-title: 32px;
+  --fs-topic-desc: 18px;
+  --fs-nav-card-title: 20px;
+  --fs-nav-card-desc: 14px;
 }
 
 
@@ -35,7 +42,7 @@ body {
   color: var(--text-dark);
   margin: 0;
   padding: 0;
-  padding-top: var(--header-height);
+  padding-top: 0;
   line-height: 1.6;
 }
 
@@ -54,7 +61,7 @@ body {
   color: var(--text-dark);
   margin: 0;
   padding: 0;
-  padding-top: var(--header-height);
+  padding-top: 0;
   line-height: 1.6;
 }
 
@@ -64,7 +71,7 @@ body {
    ========================================== */
 
 .header {
-  position: fixed;
+  position: static;
   top: 0;
   left: 0;
   right: 0;
@@ -108,47 +115,125 @@ body {
 
 .nav-menu-center{
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  gap: 4px;
+  gap: 32px;
   width: fit-content;
-  margin: 0 auto 30px;
-  background: var(--light-gray);
-  border-radius: 50px;
-  padding: 10px 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin: 0 auto 40px;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
 }
 
 .nav-link {
-  color: var(--bright-blue);
-  font-family: 'National Park', 
-  font-size: 14px;
-  font-style: normal;
+  color: var(--solid-blue);
+  font-family: 'National Park', sans-serif;
+  font-size: 0.95rem;
   font-weight: 600;
-  line-height: normal;
-  letter-spacing: 0.7px;
-  text-transform: capitalize;
-  
-  /* Layout & interaction */
   text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   padding: 12px 28px;
   border-radius: 50px;
   transition: all 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .nav-link:hover {
-  background: var(--white);
+  background: var(--light-gray);
   color: var(--bright-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 193, 255, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 193, 255, 0.12);
 }
 
 .nav-link.active {
   background: var(--bright-blue);
   color: var(--white);
   box-shadow: 0 4px 12px rgba(0, 193, 255, 0.3);
+}
+
+.nav-card {
+  color: var(--solid-blue);
+  font-family: 'National Park';
+  text-decoration: none;
+  padding: 20px 26px;
+  border-radius: 16px;
+  background: var(--white);
+  border: 1px solid var(--border-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 240px;
+  max-width: 280px;
+  min-height: 260px;
+  flex: 1 1 0;
+  text-align: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  white-space: normal;
+  box-shadow: 0 8px 20px rgba(0, 34, 68, 0.08);
+  text-transform: none;
+}
+
+.nav-card:hover {
+  background: #f5fbff;
+  color: var(--solid-blue);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 193, 255, 0.16);
+  border-color: var(--bright-blue);
+}
+
+.nav-card.active {
+  border-color: var(--bright-blue);
+  box-shadow: 0 12px 24px rgba(0, 193, 255, 0.18);
+}
+
+.nav-link-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.nav-link-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--solid-blue-60);
+  line-height: 1.5;
+}
+
+.nav-link-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--solid-blue-60);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.nav-link-cta {
+  margin-top: auto;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--solid-blue);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 12px rgba(0, 34, 68, 0.2);
+}
+
+.nav-link:hover .nav-link-cta {
+  background: var(--bright-blue);
+  box-shadow: 0 8px 16px rgba(0, 193, 255, 0.3);
 }
 
 
@@ -268,7 +353,7 @@ body {
    ========================================== */
 .page-title {
   font-family: 'National Park', sans-serif;
-  font-size: 3em;
+  font-size: var( --fs-page-title);
   font-weight: 700;
   color: var(--solid-blue);
   margin-bottom: 20px;
@@ -277,7 +362,7 @@ body {
 
 .page-subtitle {
   font-family: 'National Park', sans-serif;
-  font-size: 2rem;
+  font-size: var( --fs-page-subtitle);
   color: var(--solid-blue-60);
   line-height: 1.8;
   max-width: 800px;
@@ -286,13 +371,15 @@ body {
 
 .section-divider {
   font-family: 'National Park', sans-serif;
-  font-size: 1.5rem;
+  font-size: var(--fs-section-divider);
   font-weight: 600;
   color: var(--solid-blue);
   text-transform: uppercase;
   letter-spacing: 1px;
+  display: block;
+  text-align: center;
   margin: 60px 0 30px 0;
-  padding-bottom: 10px;
+  padding-bottom: 0;
 }
 
 /* ==========================================
@@ -313,37 +400,22 @@ body {
 }
 
 .topic-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border: 1px solid var(--border-gray);
-  border-radius: 8px;
-  padding: 40px 30px;
+  border-radius: 14px;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-}
-
-.topic-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--bright-blue);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  box-shadow: 0 8px 18px rgba(0, 34, 68, 0.08);
 }
 
 .topic-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 34, 68, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 193, 255, 0.18);
   border-color: var(--bright-blue);
-}
-
-.topic-card:hover::before {
-  transform: scaleX(1);
 }
 
 .topic-card.disabled {
@@ -353,43 +425,48 @@ body {
 
 .topic-card.disabled:hover {
   transform: none;
-  box-shadow: none;
+  box-shadow: 0 8px 18px rgba(0, 34, 68, 0.08);
   border-color: var(--border-gray);
 }
 
-.topic-card-header {
-  height: 120px;
-  border-radius: 8px;
-  margin-bottom: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--solid-blue) 0%, var(--solid-blue-60) 100%);
+.topic-card-image {
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.topic-card-header.labor {
-  background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+.topic-card-image.labor-img {
+  background-image: linear-gradient(135deg, #0062FF 0%, #2B8CFF 50%, #6CCBFF 100%);
+  background-color: #0062FF;
 }
 
-.topic-card-header.minwage {
-  background: linear-gradient(135deg, #2D5F5D 0%, #1A3A38 100%);
+.topic-card-image.minwage-img {
+  background-image: linear-gradient(135deg, #FF8743 0%, #FFA45F 55%, #FFD0A6 100%);
+  background-color: #FF8743;
 }
 
-.topic-card-header.btax {
-  background: linear-gradient(135deg, #8B3A62 0%, #6B1B42 100%);
+.topic-card-image.btax-img {
+  background-image: linear-gradient(135deg, #B62650 0%, #D64A6C 55%, #F29CB5 100%);
+  background-color: #B62650;
+}
+
+.topic-card-body {
+  padding: 20px 22px 24px;
 }
 
 .topic-card-title {
   font-family: 'National Park', sans-serif;
-  font-size: 1.5rem;
+  font-size: var(--fs-topic-title);
   font-weight: 700;
   color: var(--solid-blue);
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .topic-card-description {
   font-family: 'National Park', sans-serif;
-  font-size: 1rem;
+  font-size: var(--fs-topic-desc);
   color: var(--solid-blue-60);
   line-height: 1.6;
   margin-bottom: 15px;
