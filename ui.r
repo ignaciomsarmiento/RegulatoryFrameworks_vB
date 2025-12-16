@@ -341,7 +341,7 @@ shinyUI(
                   href = "#",
                   class = "landing-card",
                   onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'}); return false;",
-                  tags$div(class = "landing-card-image", style = "background-image: url('topic-labor.png');"),
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-labor.jpg');"),
                   tags$div(
                     class = "landing-card-body",
                     h3("Non-Salary Labor Costs"),
@@ -353,7 +353,7 @@ shinyUI(
                   href = "#",
                   class = "landing-card",
                   onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
-                  tags$div(class = "landing-card-image", style = "background-image: url('topic-minimu.png');"),
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-minimu.jpg');"),
                   tags$div(
                     class = "landing-card-body",
                     h3("Minimum wages"),
@@ -365,7 +365,7 @@ shinyUI(
                   href = "#",
                   class = "landing-card",
                   onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
-                  tags$div(class = "landing-card-image", style = "background-image: url('topic-business.png');"),
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-business.jpg');"),
                   tags$div(
                     class = "landing-card-body",
                     h3("Business taxes"),
