@@ -103,6 +103,7 @@ labor_server <- function(input, output, session) {
   observeEvent(input$occupational_risk, { selected_groupE("occupational_risk") })
   
   # ---- Bonuses and Benefits ----
+  observeEvent(input$all_bonuses, { selected_groupD("all_bonuses") })
   observeEvent(input$ab,  { selected_groupD("ab") })
   observeEvent(input$pl,  { selected_groupD("pl") })
   observeEvent(input$ob,  { selected_groupD("ob") })
@@ -1825,4 +1826,3 @@ output$download_df <- downloadHandler(
     contentType = "text/csv"
   )
 }
-
