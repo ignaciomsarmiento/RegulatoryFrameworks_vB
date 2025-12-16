@@ -124,10 +124,10 @@ tagList(
       column(
       width = 12,
         tags$div(
-        style = "margin-bottom: 20px;",
+        style = "margin-bottom: 20px; background: #fff; padding: 16px; border-radius: 12px;",
         h1(class = "topic-title", "Non-salary Labor Costs"),
         p(class = "topic-subtitle",
-        "Bonuses, social contributions, severance, and other employer-paid costs")
+        "Explore non-wage labor costs employers incur beyond direct wages, including legally required social contributions by payer (employer vs. employee) and by benefit component. Analyze how these costs vary across countries and wage levels.")
         )
     )
   ),

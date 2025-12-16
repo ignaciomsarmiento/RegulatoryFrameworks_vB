@@ -206,7 +206,12 @@ shinyUI(
         class = "header-content",
         
         # Logo (izquierda)
-        tags$img(src = "WB.png", class = "wb-logo"),
+        tags$img(
+          src = "WB.png",
+          class = "wb-logo",
+          style = "cursor: pointer;",
+          onclick = "document.querySelector('a[data-value=\"landing\"]').click();"
+        ),
         
         # Spacer (centro) — mantiene alineación del grid
         tags$div(),
@@ -325,7 +330,7 @@ shinyUI(
                     onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
                     "business taxes"
                   ),
-                  " across Latin American countries. Dive into interactive visualizations and detailed analyses to understand regional regulatory frameworks."
+                  " across countries. Dive into interactive visualizations and detailed analyses to understand regional regulatory frameworks."
                 )
               )
             ),
@@ -345,7 +350,7 @@ shinyUI(
                   tags$div(
                     class = "landing-card-body",
                     h3("Non-Salary Labor Costs"),
-                    p("Yearly bonuses in number of monthly wages across Latin America")
+                    p("Explore non-wage labor costs employers incur beyond direct wages, including legally required social contributions by payers.")
                   )
                 ),
                 
@@ -357,7 +362,7 @@ shinyUI(
                   tags$div(
                     class = "landing-card-body",
                     h3("Minimum wages"),
-                    p("Yearly bonuses in number of monthly wages across Latin America")
+                    p("Explore minimum wage levels across countries")
                   )
                 ),
                 
@@ -369,7 +374,7 @@ shinyUI(
                   tags$div(
                     class = "landing-card-body",
                     h3("Business taxes"),
-                    p("Yearly bonuses in number of monthly wages across Latin America")
+                    p("Explore business tax rates and regulations")
                   )
                 )
               )
