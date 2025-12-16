@@ -279,109 +279,138 @@ shinyUI(
         # ============================
         tabPanel(
           "landing",
-          tags$section(
-            class = "page-section",
-            tags$div(
-              class = "landing-container",
-              
-              # Hero Banner
-              #tags$div(class = "hero-banner"),
-              
-              # Two Column Layout for Title and Description
-              tags$div(
-                class = "row",
-                style = "margin-bottom: 60px;",
-                
-                # Left Column: Title
-                tags$div(
-                  class = "col-md-6",
-                  h1(
-                    class = "page-title",
-                    "Regulatory", tags$br(), "Frameworks Explorer"
-                  )
-                ),
-                
-                # Right Column: Description
-                tags$div(
-                  class = "col-md-6",
-                  p(
-                    class = "page-subtitle",
-                    style = "margin-top: 0;",
-                    "Explore comprehensive data on non-salary labor costs, minimum wages, and business taxes, across  countries. Dive into interactive visualizations and detailed analyses to understand regional regulatory frameworks."
-                  )
-                )
-              ),
-              
-              tags$div(
-                class = "nav-menu-center",
-                tags$a(
-                  class = "nav-link nav-card",
-                  `data-tab` = "Guide",
-                  tags$span(class = "nav-link-circle", style = "background-image: url('guide-circle.jpg');"),
-                  tags$span(class = "nav-link-title", "Guide"),
-                  tags$span(class = "nav-link-desc", "Learn how to read and navigate the data.")
-                ),
-                tags$a(
-                  class = "nav-link nav-card",
-                  `data-tab` = "About",
-                  tags$span(class = "nav-link-circle", style = "background-image: url('about-circle.jpg');"),
-                  tags$span(class = "nav-link-title", "About"),
-                  tags$span(class = "nav-link-desc", "Meet the team and project goals.")
-                )
-              ),
-              
-              # Section Divider
-              tags$div(
-                class = "section-divider",
-                "Choose a Topic To Explore"
-              ),
-              
-              
-              tags$div(class = "topic-grid",
-                       tags$div(
-                         class = "topic-card", 
-                         onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'})",
-                         tags$div(class = "topic-card-image labor-img", style = "background-image: url('topic-labor.png');"),
-                         tags$div(
-                           class = "topic-card-body",
-                           h3(class = "topic-card-title", "Non-Salary Labor Costs"),
-                           p(class = "topic-card-description", "Yearly bonuses, social security contributions, and employment benefits")
-                         )
-                       ),
-                       # Minimum Wages
-                       tags$div(
-                         class = "topic-card disabled",
-                         onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();",
-                         tags$div(class = "topic-card-image minwage-img"),
-                         tags$div(
-                           class = "topic-card-body",
-                           h3(class = "topic-card-title", "Minimum Wages"),
-                           p(class = "topic-card-description", "Minimum wage policies and trends across the region"),
-                           tags$span(class = "topic-card-badge", "FORTHCOMING")
-                         )
-                       ),
-                       
-                       # Business Taxes
-                       tags$div(
-                         class = "topic-card disabled",
-                         onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click();",
-                         tags$div(class = "topic-card-image btax-img"),
-                         tags$div(
-                           class = "topic-card-body",
-                           h3(class = "topic-card-title", "Business Taxes"),
-                           p(class = "topic-card-description", "Corporate tax rates, incentives, and fiscal policies"),
-                           tags$span(class = "topic-card-badge", "FORTHCOMING")
-                         )
-                       )
-                      
-               
-                                     
-              ),
+          tags$div(
+            class = "landing-new",
             
+            # Hero
+            tags$div(
+              class = "landing-hero",
               tags$div(
-                class = "footer",
-                tags$p(class = "footer-text", "© 2025 World Bank Group")
-              )     
+                class = "landing-hero-image",
+                style = "background-image: url('landing2.jpeg');"
+              ),
+              tags$div(
+                class = "landing-hero-text",
+                tags$div(
+                  class = "landing-hero-heading",
+                  tags$div(
+                    class = "landing-hero-eyebrow-col",
+                    tags$span(class = "landing-eyebrow", "WELCOME TO THE")
+                  ),
+                  tags$div(
+                    class = "landing-hero-title-col",
+                    h1(class = "landing-hero-title", "Regulatory", tags$br(), "Frameworks Explorer")
+                  )
+                ),
+                p(
+                  class = "landing-hero-desc",
+                  "Explore comprehensive data on ",
+                  tags$a(
+                    href = "#",
+                    class = "landing-inline-link",
+                    onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'}); return false;",
+                    "non-salary labor costs"
+                  ),
+                  ", ",
+                  tags$a(
+                    href = "#",
+                    class = "landing-inline-link",
+                    onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
+                    "minimum wages"
+                  ),
+                  " and ",
+                  tags$a(
+                    href = "#",
+                    class = "landing-inline-link",
+                    onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
+                    "business taxes"
+                  ),
+                  " across Latin American countries. Dive into interactive visualizations and detailed analyses to understand regional regulatory frameworks."
+                )
+              )
+            ),
+            
+            # Topics
+            tags$div(
+              class = "landing-section",
+              tags$span(class = "landing-section-label", "Choose a regulatory framework topic to explore detailed data and visualizations"),
+              tags$div(
+                class = "landing-card-grid",
+                
+                tags$a(
+                  href = "#",
+                  class = "landing-card",
+                  onclick = "Shiny.setInputValue('topic_selected', 'labor', {priority: 'event'}); return false;",
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-labor.png');"),
+                  tags$div(
+                    class = "landing-card-body",
+                    h3("Non-Salary Labor Costs"),
+                    p("Yearly bonuses in number of monthly wages across Latin America")
+                  )
+                ),
+                
+                tags$a(
+                  href = "#",
+                  class = "landing-card",
+                  onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-minimu.png');"),
+                  tags$div(
+                    class = "landing-card-body",
+                    h3("Minimum wages"),
+                    p("Yearly bonuses in number of monthly wages across Latin America")
+                  )
+                ),
+                
+                tags$a(
+                  href = "#",
+                  class = "landing-card",
+                  onclick = "document.querySelector('a[data-value=\"forthcoming\"]').click(); return false;",
+                  tags$div(class = "landing-card-image", style = "background-image: url('topic-business.png');"),
+                  tags$div(
+                    class = "landing-card-body",
+                    h3("Business taxes"),
+                    p("Yearly bonuses in number of monthly wages across Latin America")
+                  )
+                )
+              )
+            ),
+            
+            # Explore more
+            tags$div(
+              class = "landing-section explore-more",
+              tags$span(class = "landing-section-label", "Explore more"),
+              tags$div(
+                class = "landing-card-grid small",
+                
+                tags$a(
+                  href = "#",
+                  class = "landing-card",
+                  onclick = "document.querySelector('a[data-value=\"Guide\"]').click(); return false;",
+                  tags$div(class = "landing-card-image", style = "background-image: url('about-circle.png');"),
+                  tags$div(
+                    class = "landing-card-body",
+                    h3("Guide"),
+                    p("Learn how to read and navigate the data")
+                  )
+                ),
+                
+                tags$a(
+                  href = "#",
+                  class = "landing-card",
+                  onclick = "document.querySelector('a[data-value=\"About\"]').click(); return false;",
+                  tags$div(class = "landing-card-image", style = "background-image: url('about-circle.png');"),
+                  tags$div(
+                    class = "landing-card-body",
+                    h3("About"),
+                    p("Meet the team and project goals")
+                  )
+                )
+              )
+            ),
+            
+            tags$div(
+              class = "footer",
+              tags$p(class = "footer-text", "© 2025 World Bank Group")
             )
           )
         ),

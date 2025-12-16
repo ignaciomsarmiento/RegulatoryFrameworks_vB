@@ -840,18 +840,19 @@ body {
 /* ==========================================
    FOOTER
    ========================================== */
+
 .footer {
   background: var(--light-gray);
-  padding: 30px 40px;
-  text-align: center;
+  padding: 14px 40px;
+  text-align: left;
   border-top: 1px solid var(--border-gray);
   margin-top: 80px;
 }
 
 .footer-text {
   font-family: 'National Park', sans-serif;
-  font-size: 0.9rem;
-  color: var(--solid-blue-60);
+  font-size: 14px;
+  color: #999;
 }
 
 /* ==========================================
@@ -943,8 +944,21 @@ body {
   white-space: nowrap !important;
 }
 
+/* ----------------------------------------------------------
+   info-icon
+-----------------------------------------------------------*/
 
-
+.info-icon {
+  text-transform: none !important;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #0f3b66;
+  font-size: 11px;
+}
 
 
 /* ----------------------------------------------------------
