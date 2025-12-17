@@ -25,6 +25,7 @@
   --fs-topic-desc: 18px;
   --fs-nav-card-title: 20px;
   --fs-nav-card-desc: 14px;
+  --fs-page-hamburger: 35px;
 }
 
 
@@ -275,6 +276,8 @@ body {
 
 .hamburger-dropdown a {
   display: block;
+  font-size: var(--fs-page-hamburger);
+  line-height: 1.2;
   padding: 12px 20px;
   text-decoration: none;
   color: var(--solid-blue);
